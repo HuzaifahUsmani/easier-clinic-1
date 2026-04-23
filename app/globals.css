@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f1e8;
+  --paper: #faf7f0;
+  --surface: #ffffff;
+  --foreground: #121212;
+  --ink: #0a0a0a;
+  --muted: #565248;
+  --rule: #d9d2c0;
+  --rule-strong: #b4ac96;
+  --accent: #1e4d3a;
+  --accent-soft: #e7ebe3;
+  --warn: #b8472d;
+  --warn-soft: #f3e6df;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-paper: var(--paper);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --font-sans: var(--font-sans-custom);
+  --font-serif: var(--font-serif-custom);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { border-color: var(--rule); }
+
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+.serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-feature-settings: "liga", "kern";
+}
+
+.display {
+  font-family: var(--font-serif), Georgia, serif;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-weight: 400;
+}
+
+.rule { border-top: 1px solid var(--rule); }
+
+/* Link with animated underline */
+a.hairline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+a.hairline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+a.hairline:hover::after {
+  transform-origin: right;
+  transform: scaleX(0);
+  animation: underline 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes underline {
+  0%   { transform-origin: right; transform: scaleX(1); }
+  50%  { transform-origin: right; transform: scaleX(0); }
+  51%  { transform-origin: left;  transform: scaleX(0); }
+  100% { transform-origin: left;  transform: scaleX(1); }
+}
+
+/* Drop cap */
+.dropcap::first-letter {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 4.25rem;
+  line-height: 0.9;
+  float: left;
+  padding: 0.35rem 0.6rem 0 0;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Oversized section numeral */
+.ordinal {
+  font-family: var(--font-serif), Georgia, serif;
+  font-feature-settings: "onum";
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+/* Subtle scroll-in used sparingly */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Ticker marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Number focus border */
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+/* Input focus within form */
+input:focus, textarea:focus, select:focus { outline: none; }
