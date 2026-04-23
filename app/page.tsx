@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import LossCalculator from "@/components/LossCalculator";
 import IntegrationsStrip from "@/components/IntegrationsStrip";
+import MagneticCTA from "@/components/MagneticCTA";
 import {
   PinnedChapter,
   LineReveal,
@@ -589,12 +590,14 @@ function Chapter06({ progress }: { progress: MotionValue<number> }) {
             to keep whether we work together or not.
           </p>
           <div className="md:col-span-5 md:col-start-8 flex md:justify-end">
-            <Link
-              href="/book"
-              className="inline-flex items-center border border-background bg-background text-ink px-8 py-4 text-sm hover:bg-accent hover:text-background hover:border-accent transition-colors"
-            >
-              Book yours &nbsp;&rarr;
-            </Link>
+            <MagneticCTA strength={0.5} radius={160}>
+              <Link
+                href="/book"
+                className="inline-flex items-center border border-background bg-background text-ink px-8 py-4 text-sm hover:bg-accent hover:text-background hover:border-accent transition-colors"
+              >
+                Book yours &nbsp;&rarr;
+              </Link>
+            </MagneticCTA>
           </div>
         </motion.div>
       </div>

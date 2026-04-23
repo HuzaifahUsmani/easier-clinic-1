@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import BundleBuilder from "@/components/BundleBuilder";
+import DistortCard from "@/components/DistortCard";
+import MagneticCTA from "@/components/MagneticCTA";
 
 const tiers = [
   {
@@ -100,44 +102,52 @@ export default function Pricing() {
       {/* TIERS */}
       <section className="border-b border-rule">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-20 md:py-28">
-          <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-rule border-y border-rule">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {tiers.map((t) => (
-              <div key={t.name} className="p-8 md:p-10 flex flex-col">
-                <div className="serif text-2xl">{t.name}</div>
-                <div className="mt-1 text-sm text-muted">{t.target}</div>
+              <DistortCard
+                key={t.name}
+                className="bg-background border border-rule h-full"
+                intensity={6}
+              >
+                <div className="p-8 md:p-10 flex flex-col h-full">
+                  <div className="serif text-2xl">{t.name}</div>
+                  <div className="mt-1 text-sm text-muted">{t.target}</div>
 
-                <div className="mt-8 display text-3xl md:text-4xl tabular-nums">
-                  {t.monthly}
-                </div>
-                <div className="mt-1 text-sm text-muted">
-                  per month · AUD ex GST
-                </div>
-                <div className="mt-2 text-xs text-muted">
-                  + one-off setup {t.setup}
-                </div>
-
-                {t.note && (
-                  <div className="mt-5 text-sm italic serif text-accent">
-                    {t.note}
+                  <div className="mt-8 display text-3xl md:text-4xl tabular-nums">
+                    {t.monthly}
                   </div>
-                )}
+                  <div className="mt-1 text-sm text-muted">
+                    per month · AUD ex GST
+                  </div>
+                  <div className="mt-2 text-xs text-muted">
+                    + one-off setup {t.setup}
+                  </div>
 
-                <ul className="mt-8 space-y-3 text-sm text-muted flex-1">
-                  {t.features.map((f) => (
-                    <li key={f} className="grid grid-cols-[1rem_1fr] gap-2">
-                      <span>—</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
+                  {t.note && (
+                    <div className="mt-5 text-sm italic serif text-accent">
+                      {t.note}
+                    </div>
+                  )}
 
-                <Link
-                  href="/book"
-                  className="mt-10 inline-flex items-center border border-ink px-5 py-2.5 text-sm hover:bg-ink hover:text-background transition-colors w-max"
-                >
-                  Book a diagnostic
-                </Link>
-              </div>
+                  <ul className="mt-8 space-y-3 text-sm text-muted flex-1">
+                    {t.features.map((f) => (
+                      <li key={f} className="grid grid-cols-[1rem_1fr] gap-2">
+                        <span>—</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <MagneticCTA className="mt-10">
+                    <Link
+                      href="/book"
+                      className="inline-flex items-center border border-ink px-5 py-2.5 text-sm hover:bg-ink hover:text-background transition-colors"
+                    >
+                      Book a diagnostic
+                    </Link>
+                  </MagneticCTA>
+                </div>
+              </DistortCard>
             ))}
           </div>
         </div>

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="mt-32 border-t border-rule">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-12 gap-10">
-        <div className="md:col-span-5">
+        <div className="md:col-span-4">
           <Link href="/" className="font-medium tracking-tight text-lg">
             Easier<span className="serif italic">clinic</span>
           </Link>
@@ -19,7 +19,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="md:col-span-2">
           <div className="text-xs text-muted mb-3">Product</div>
           <ul className="space-y-2 text-sm">
             <li><Link href="/how-it-works" className="hover:underline">How it works</Link></li>
@@ -30,10 +30,31 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="md:col-span-4">
+        <div className="md:col-span-2">
+          <div className="text-xs text-muted mb-3">Library</div>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="/case-studies" className="hover:underline">Case studies</Link></li>
+            <li><Link href="/integrations" className="hover:underline">Integrations</Link></li>
+            <li><Link href="/pms/cliniko" className="hover:underline">For Cliniko</Link></li>
+            <li><Link href="/pms/halaxy" className="hover:underline">For Halaxy</Link></li>
+            <li><Link href="/pms/nookal" className="hover:underline">For Nookal</Link></li>
+            <li><Link href="/journal" className="hover:underline">Journal</Link></li>
+          </ul>
+        </div>
+
+        <div className="md:col-span-2">
+          <div className="text-xs text-muted mb-3">Company</div>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="/team" className="hover:underline">Team</Link></li>
+            <li><Link href="/resources" className="hover:underline">Resources</Link></li>
+            <li><Link href="/resources/diagnostic-template" className="hover:underline">Diagnostic template</Link></li>
+          </ul>
+        </div>
+
+        <div className="md:col-span-2">
           <div className="text-xs text-muted mb-3">Get started</div>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/book" className="hover:underline">Free diagnostic &mdash; 60 min</Link></li>
+            <li><Link href="/book" className="hover:underline">Free diagnostic</Link></li>
             <li><Link href="/pricing#land-offers" className="hover:underline">Starter offers</Link></li>
           </ul>
         </div>
