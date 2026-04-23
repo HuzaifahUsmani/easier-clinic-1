@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import ChapterNav from "@/components/ChapterNav";
 import EHRStrip from "@/components/EHRStrip";
+import ThemePicker from "@/components/ThemePicker";
 
 const sans = Instrument_Sans({
   variable: "--font-sans-custom",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <ChapterNav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ThemePicker />
       </body>
     </html>
   );
