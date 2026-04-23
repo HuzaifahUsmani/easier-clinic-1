@@ -2,14 +2,27 @@
 
 import { useEffect, useState } from "react";
 
+type Palette = {
+  background: string;
+  paper: string;
+  surface: string;
+  foreground: string;
+  ink: string;
+  muted: string;
+  rule: string;
+  "rule-strong": string;
+  accent: string;
+  "accent-soft": string;
+  warn: string;
+  "warn-soft": string;
+};
+
 type Theme = {
   id: string;
   name: string;
   schema: string;
   rationale: string;
-  accent: string;
-  bg: string;
-  ink: string;
+  palette: Palette;
 };
 
 const THEMES: Theme[] = [
@@ -19,9 +32,20 @@ const THEMES: Theme[] = [
     schema: "Publication · Considered",
     rationale:
       "Cream + forest. Reads like a broadsheet — slow, quiet, premium. Best when the buyer wants to feel they are being advised, not sold to.",
-    accent: "#1e4d3a",
-    bg: "#f5f1e8",
-    ink: "#0a0a0a",
+    palette: {
+      background: "#f5f1e8",
+      paper: "#faf7f0",
+      surface: "#ffffff",
+      foreground: "#121212",
+      ink: "#0a0a0a",
+      muted: "#565248",
+      rule: "#d9d2c0",
+      "rule-strong": "#b4ac96",
+      accent: "#1e4d3a",
+      "accent-soft": "#e7ebe3",
+      warn: "#b8472d",
+      "warn-soft": "#f3e6df",
+    },
   },
   {
     id: "clinical",
@@ -29,9 +53,20 @@ const THEMES: Theme[] = [
     schema: "Authority · Institution",
     rationale:
       "Navy + bone. Hospital-grade, compliance-forward. Signals 'we know the rules' to owners nervous about Privacy Act and PHI handling.",
-    accent: "#0f3555",
-    bg: "#f4f3ee",
-    ink: "#0a1424",
+    palette: {
+      background: "#f4f3ee",
+      paper: "#fbfaf5",
+      surface: "#ffffff",
+      foreground: "#0f1a2a",
+      ink: "#0a1424",
+      muted: "#4a5565",
+      rule: "#d8d9d4",
+      "rule-strong": "#a8acae",
+      accent: "#0f3555",
+      "accent-soft": "#e3eaf0",
+      warn: "#c2410c",
+      "warn-soft": "#fbe7d8",
+    },
   },
   {
     id: "sage",
@@ -39,9 +74,20 @@ const THEMES: Theme[] = [
     schema: "Calm · Wellness",
     rationale:
       "Sage + bone + clay. Feels industry-native for allied health and psychology — the tone of a modern wellness brand without being frivolous.",
-    accent: "#546b4c",
-    bg: "#f1ece0",
-    ink: "#15201c",
+    palette: {
+      background: "#f1ece0",
+      paper: "#f8f4ea",
+      surface: "#ffffff",
+      foreground: "#1d2420",
+      ink: "#15201c",
+      muted: "#5f655c",
+      rule: "#d0cdbb",
+      "rule-strong": "#a3a28f",
+      accent: "#546b4c",
+      "accent-soft": "#e5e7d9",
+      warn: "#9e553a",
+      "warn-soft": "#efdfd4",
+    },
   },
   {
     id: "oxford",
@@ -49,9 +95,20 @@ const THEMES: Theme[] = [
     schema: "Gravity · Journal",
     rationale:
       "Oxblood + warm white. Reads like The Lancet or a legal memo. Aggressive confidence for buyers who have been burned by generic agencies.",
-    accent: "#6e1e1e",
-    bg: "#f7f3ec",
-    ink: "#120806",
+    palette: {
+      background: "#f7f3ec",
+      paper: "#fbf8f2",
+      surface: "#ffffff",
+      foreground: "#1a1210",
+      ink: "#120806",
+      muted: "#58514c",
+      rule: "#ddd4c7",
+      "rule-strong": "#b2a795",
+      accent: "#6e1e1e",
+      "accent-soft": "#ede3e1",
+      warn: "#8a5200",
+      "warn-soft": "#f3e5cc",
+    },
   },
   {
     id: "desert",
@@ -59,39 +116,52 @@ const THEMES: Theme[] = [
     schema: "Grounded · Australian",
     rationale:
       "Warm sand + terracotta. Locally-rooted, handmade feel. Good for independent multi-site groups that want a partner, not a vendor.",
-    accent: "#7a3d1a",
-    bg: "#f4ead9",
-    ink: "#120e08",
+    palette: {
+      background: "#f4ead9",
+      paper: "#fbf3e3",
+      surface: "#ffffff",
+      foreground: "#1e1a14",
+      ink: "#120e08",
+      muted: "#6b5e48",
+      rule: "#d8c9aa",
+      "rule-strong": "#a8956e",
+      accent: "#7a3d1a",
+      "accent-soft": "#efe1ca",
+      warn: "#a1381f",
+      "warn-soft": "#f2dcd2",
+    },
   },
 ];
 
 const STORAGE_KEY = "ec-theme";
 
+function applyPalette(palette: Palette) {
+  const root = document.documentElement;
+  (Object.entries(palette) as [keyof Palette, string][]).forEach(([k, v]) => {
+    root.style.setProperty(`--${k}`, v);
+  });
+}
+
 export default function ThemePicker() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("default");
 
-  // Load from localStorage
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && THEMES.some((t) => t.id === saved)) {
-      setActive(saved);
-      apply(saved);
+    if (saved) {
+      const theme = THEMES.find((t) => t.id === saved);
+      if (theme) {
+        setActive(saved);
+        applyPalette(theme.palette);
+      }
     }
   }, []);
 
-  const apply = (id: string) => {
-    const root = document.documentElement;
-    if (id === "default") {
-      root.removeAttribute("data-theme");
-    } else {
-      root.setAttribute("data-theme", id);
-    }
-  };
-
   const choose = (id: string) => {
+    const theme = THEMES.find((t) => t.id === id);
+    if (!theme) return;
     setActive(id);
-    apply(id);
+    applyPalette(theme.palette);
     localStorage.setItem(STORAGE_KEY, id);
   };
 
@@ -99,7 +169,6 @@ export default function ThemePicker() {
 
   return (
     <>
-      {/* Floating trigger */}
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -109,13 +178,12 @@ export default function ThemePicker() {
       >
         <span
           className="inline-block w-3 h-3 border border-ink/30"
-          style={{ background: current.accent }}
+          style={{ background: current.palette.accent }}
           aria-hidden
         />
         <span>Theme · {current.name}</span>
       </button>
 
-      {/* Panel */}
       {open && (
         <div
           className="fixed bottom-20 right-5 z-40 w-[min(380px,calc(100vw-2.5rem))] bg-background border border-ink shadow-[0_10px_40px_rgba(0,0,0,0.15)]"
@@ -151,17 +219,17 @@ export default function ThemePicker() {
                     <div className="flex flex-col gap-0.5 pt-0.5">
                       <span
                         className="block w-7 h-7 border border-ink/20"
-                        style={{ background: t.bg }}
+                        style={{ background: t.palette.background }}
                         aria-hidden
                       />
                       <span
                         className="block w-7 h-2"
-                        style={{ background: t.accent }}
+                        style={{ background: t.palette.accent }}
                         aria-hidden
                       />
                       <span
                         className="block w-7 h-1"
-                        style={{ background: t.ink }}
+                        style={{ background: t.palette.ink }}
                         aria-hidden
                       />
                     </div>

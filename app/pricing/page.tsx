@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import BundleBuilder from "@/components/BundleBuilder";
 
 const tiers = [
   {
@@ -139,6 +140,28 @@ export default function Pricing() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* BUILD YOUR BUNDLE */}
+      <section className="border-b border-rule bg-paper">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 md:py-28">
+          <div className="grid md:grid-cols-12 gap-10 mb-12">
+            <div className="md:col-span-5">
+              <p className="text-xs uppercase tracking-widest text-accent mb-6">
+                Or build your own
+              </p>
+              <h2 className="display text-3xl md:text-5xl">
+                Want a mix that isn&apos;t in the three tiers?
+              </h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 text-muted md:text-lg leading-relaxed self-end">
+              Toggle modules to configure your own bundle. Conflicts and
+              dependencies resolve automatically, so the price on the right
+              always reflects a workable scope.
+            </div>
+          </div>
+          <BundleBuilder />
         </div>
       </section>
 

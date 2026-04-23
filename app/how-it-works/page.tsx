@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import OnboardingTimeline from "@/components/OnboardingTimeline";
 
 const pillars = [
   {
@@ -120,6 +121,31 @@ export default function HowItWorks() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* 90-DAY ONBOARDING */}
+      <section className="border-b border-rule relative">
+        <span className="ordinal absolute top-16 right-6 md:right-10 text-[10rem] md:text-[14rem] leading-none text-rule-strong/30 select-none pointer-events-none">
+          III
+        </span>
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-20 md:py-28 relative">
+          <div className="grid md:grid-cols-12 gap-10 mb-16">
+            <div className="md:col-span-5">
+              <p className="text-xs uppercase tracking-widest text-muted mb-6">
+                What your first 90 days look like
+              </p>
+              <h2 className="display text-3xl md:text-5xl">
+                From signed contract to <span className="italic">quarterly review</span>.
+              </h2>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 text-muted md:text-lg leading-relaxed self-end">
+              Eight milestones, one cadence. Nobody in the clinic is asking
+              &ldquo;what happens next?&rdquo; &mdash; it is all scheduled, dated,
+              and visible in ClickUp.
+            </div>
+          </div>
+          <OnboardingTimeline />
         </div>
       </section>
 
