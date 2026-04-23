@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import ChapterNav from "@/components/ChapterNav";
+import EHRStrip from "@/components/EHRStrip";
 
 const sans = Instrument_Sans({
   variable: "--font-sans-custom",
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${sans.variable} ${serif.variable} h-full`}>
       <body className="min-h-full flex flex-col">
         <SmoothScroll />
+        <EHRStrip />
         <Navbar />
         <ChapterNav />
         <main className="flex-1">{children}</main>

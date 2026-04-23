@@ -25,6 +25,7 @@ export default function Footer() {
             <li><Link href="/how-it-works" className="hover:underline">How it works</Link></li>
             <li><Link href="/who-its-for" className="hover:underline">Who it&apos;s for</Link></li>
             <li><Link href="/pricing" className="hover:underline">Pricing</Link></li>
+            <li><Link href="/hiring-onshore" className="hover:underline">Hire onshore</Link></li>
             <li><Link href="/compliance" className="hover:underline">Compliance</Link></li>
           </ul>
         </div>
