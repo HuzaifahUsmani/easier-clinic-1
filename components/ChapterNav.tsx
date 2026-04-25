@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 
 const chapters = [
-  { id: "ch-01", label: "The hook" },
-  { id: "ch-02", label: "A week with us" },
-  { id: "ch-03", label: "Your number" },
-  { id: "ch-04", label: "The thesis" },
-  { id: "ch-05", label: "The field" },
-  { id: "ch-06", label: "Begin" },
+  { id: "ch-01", label: "Boot" },
+  { id: "ch-02", label: "Schedule" },
+  { id: "ch-03", label: "Tasks" },
+  { id: "ch-04", label: "Automations" },
+  { id: "ch-05", label: "Reports" },
+  { id: "ch-06", label: "Cost of waiting" },
 ];
 
 export default function ChapterNav() {
